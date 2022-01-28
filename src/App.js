@@ -7,7 +7,6 @@ import useTextData from "./hooks/useTextData";
 function App() {
   const [inputText, setInputText] = useState("");
   const { topUsedWords, wordCount, charCount } = useTextData(inputText);
-  console.log(topUsedWords);
 
   return (
     <Box display={"flex"} justifyContent={"center"} bg={"#f5f5f5"} h={"100vh"}>
@@ -17,10 +16,17 @@ function App() {
           onChange={(e) => setInputText(e.target.value)}
         />
         <CountStats wordCount={wordCount} charCount={charCount} />
-        <WordAccordion words={topUsedWords} />
+        <WordAccordion
+          annotatedWords={topUsedWordToAnnotatedWords(topUsedWords)}
+        />
       </Flex>
     </Box>
   );
 }
 
+function topUsedWordToAnnotatedWords(t) {
+  return t.map(({ word, count }) => {
+    return { word, annotation: count };
+  });
+}
 export default App;

@@ -2,11 +2,16 @@ import { Accordion } from "@chakra-ui/react";
 import WordAccordionItem from "./WordAccordionItem";
 
 export default function WordAccordion(props) {
-  const { words, ...otherProps } = props;
+  const { annotatedWords, ...otherProps } = props;
   return (
     <Accordion {...otherProps}>
-      {words &&
-        words.map((word) => <WordAccordionItem key={word} word={word} />)}
+      {annotatedWords &&
+        annotatedWords.map((annotatedWord) => (
+          <WordAccordionItem
+            key={annotatedWord.word}
+            annotatedWord={annotatedWord}
+          />
+        ))}
     </Accordion>
   );
 }

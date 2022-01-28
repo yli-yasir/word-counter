@@ -10,11 +10,7 @@ const useTextData = (text) => {
   });
 
   useEffect(() => {
-    const _textData = getTextData(text);
-    _textData.topUsedWords = _textData.topUsedWords.map(
-      ({ word, count }) => `${word} (${count})`
-    );
-    setTextData(_textData);
+    setTextData(getTextData(text));
   }, [text]);
 
   return textData;

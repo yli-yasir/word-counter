@@ -27,7 +27,8 @@ export function getTextData(text) {
 
 function getWordUsageCount(words) {
   const counts = {};
-  for (const word of words) {
+  for (let word of words) {
+    word = word.toLowerCase();
     counts[word] = counts[word] ? counts[word] + 1 : 1;
   }
   return counts;

@@ -15,20 +15,20 @@ import { aggregateWordSynoyms, getWordData } from "../utils";
 import LoadingPresenter from "./LoadingPresenter";
 
 export default function WordAccordionItem(props) {
-  const { word, ...rootProps } = props;
+  const { annotatedWord, ...rootProps } = props;
   const [{ loading, error, value: synonyms }, fetchWord] =
     useAsyncFn(async () => {
-      const fetchResult = await getWordData(word);
+      const fetchResult = await getWordData(annotatedWord.word);
       console.log(fetchResult);
       return aggregateWordSynoyms(fetchResult.data[0]);
-    }, [word]);
+    }, [annotatedWord]);
 
   return (
     <AccordionItem {...rootProps}>
       <h2>
-        <AccordionButton onClick={() => fetchWord(word)}>
+        <AccordionButton onClick={() => fetchWord(annotatedWord)}>
           <Box flex="1" textAlign="left" textTransform="capitalize">
-            {word}
+            {`${annotatedWord.word} (${annotatedWord.annotation})`}
           </Box>
           <AccordionIcon />
         </AccordionButton>
