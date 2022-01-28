@@ -17,7 +17,7 @@ export function aggregateWordSynoyms(wordData) {
 }
 
 export function getTextData(text) {
-  const words = text.match(/\w[\w-]*/g);
+  const words = text.match(/\w[\w-]*/g) || [];
   return {
     wordCount: words.length,
     charCount: text.length,
