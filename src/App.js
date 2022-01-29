@@ -1,9 +1,10 @@
 import InputField from "./components/Input";
 import { Flex, Box } from "@chakra-ui/react";
-import CountStats from "./components/CountStats";
+import Stats from "./components/Stats";
 import WordAccordion from "./components/WordAccordion";
 import { useState } from "react";
 import useTextData from "./hooks/useTextData";
+import WordChart from "./components/WordChart";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -16,8 +17,13 @@ function App() {
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
         />
-        <CountStats wordCount={wordCount} charCount={charCount} />
-        <WordAccordion wordFrequencies={wordFrequencies} />
+        <Stats wordCount={wordCount} charCount={charCount} />
+        {wordFrequencies && (
+          <>
+            <WordAccordion wordFrequencies={wordFrequencies} />
+            <WordChart wordFrequencies={wordFrequencies} />
+          </>
+        )}
       </Flex>
     </Box>
   );

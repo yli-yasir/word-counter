@@ -12,7 +12,7 @@ import {
 import { useAsyncFn } from "react-use";
 import { aggregateWordSynoyms, getWordData } from "../wordAPI";
 import LoadingPresenter from "./LoadingPresenter";
-import PropTypes from "prop-types";
+import wordFrequency from "../appPropTypes";
 
 export default function WordAccordionItem(props) {
   const { wordFrequency, ...rootProps } = props;
@@ -42,10 +42,7 @@ export default function WordAccordionItem(props) {
 }
 
 WordAccordionItem.propTypes = {
-  wordFrequency: PropTypes.shape({
-    word: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-  }),
+  wordFrequency,
 };
 
 function renderSynonyms(synonyms) {
