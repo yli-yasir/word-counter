@@ -1,43 +1,60 @@
-import axios from "axios";
+// Just use typescript?
 
-export async function getWordData(word) {
-  return await axios.get(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word.trim()}`
-  );
-}
+/**
+ * @typedef {Object} textStats
+ * @property {number} wordCount
+ * @property {number} charCount
+ * @property {wordFrequency[]} wordFrequencies
+ */
 
-export function aggregateWordSynoyms(wordData) {
-  const synonyms = [];
-  for (const meaning of wordData.meanings) {
-    for (const definition of meaning.definitions) {
-      synonyms.push(...definition.synonyms);
-    }
-  }
-  return synonyms;
-}
+/**
+ * @typedef {Object} wordFrequency
+ * @property {string} word
+ * @property {string} count
+ */
 
-export function getTextData(text) {
+/**
+ * @typedef {"asc" | "desc"} sortOrder
+ */
+
+export function evaluateTextStats(text) {
   const words = text.match(/\w[\w-]*/g) || [];
   return {
     wordCount: words.length,
     charCount: text.length,
-    topUsedWords: getTopUsedWords(getWordUsageCount(words)),
+    wordFrequencies: getWordFrequencies(words),
   };
 }
 
-function getWordUsageCount(words) {
-  const counts = {};
+/**
+ * @param {string[]} words
+ * @param {sortOrder} sortOrder
+ * @returns {wordFrequency[]}
+ */
+function getWordFrequencies(words, sortOrder = "desc") {
+  const records = {};
+  const wordFrequencies = [];
   for (let word of words) {
     word = word.toLowerCase();
-    counts[word] = counts[word] ? counts[word] + 1 : 1;
+    if (records[word]) {
+      records[word].count++;
+    } else {
+      const wordFrequency = { word, count: 1 };
+      records[word] = wordFrequency;
+      wordFrequencies.push(wordFrequency);
+    }
   }
-  return counts;
+  return sortWordFrequencies(wordFrequencies, sortOrder);
 }
 
-function getTopUsedWords(wordUsageCount, limit = 10) {
-  const topUsedWords = [];
-  for (const [word, count] of Object.entries(wordUsageCount)) {
-    topUsedWords.push({ word, count });
-  }
-  return topUsedWords.sort((a, b) => b.count - a.count).slice(0, limit);
+/**
+ * @param {wordFrequency[]} wordFrequencies
+ * @param {sortOrder} sortOrder
+ * @returns {wordFrequency[]}
+ */
+function sortWordFrequencies(wordFrequencies, sortOrder) {
+  const sortOrderModifier = sortOrder === "desc" ? -1 : 1;
+  return wordFrequencies.sort(
+    (a, b) => (a.count - b.count) * sortOrderModifier
+  );
 }
