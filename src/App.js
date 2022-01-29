@@ -2,11 +2,12 @@ import InputField from "./components/Input";
 import { Flex, Box } from "@chakra-ui/react";
 import CountStats from "./components/CountStats";
 import WordAccordion from "./components/WordAccordion";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useTextData from "./hooks/useTextData";
+
 function App() {
   const [inputText, setInputText] = useState("");
-  const { topUsedWords, wordCount, charCount } = useTextData(inputText);
+  const { wordFrequencies, wordCount, charCount } = useTextData(inputText);
 
   return (
     <Box display={"flex"} justifyContent={"center"} bg={"#f5f5f5"} h={"100vh"}>
@@ -16,17 +17,10 @@ function App() {
           onChange={(e) => setInputText(e.target.value)}
         />
         <CountStats wordCount={wordCount} charCount={charCount} />
-        <WordAccordion
-          annotatedWords={topUsedWordToAnnotatedWords(topUsedWords)}
-        />
+        <WordAccordion wordFrequencies={wordFrequencies} />
       </Flex>
     </Box>
   );
 }
 
-function topUsedWordToAnnotatedWords(t) {
-  return t.map(({ word, count }) => {
-    return { word, annotation: count };
-  });
-}
 export default App;

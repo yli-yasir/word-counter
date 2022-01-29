@@ -1,4 +1,5 @@
 import { Spinner } from "@chakra-ui/react";
+import PropTypes from "prop-types";
 
 export default function LoadingPresenter({ loading, error, result, children }) {
   return (
@@ -9,3 +10,10 @@ export default function LoadingPresenter({ loading, error, result, children }) {
     </>
   );
 }
+
+LoadingPresenter.propTypes = {
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool,
+  result: PropTypes.object,
+  children: PropTypes.func,
+};

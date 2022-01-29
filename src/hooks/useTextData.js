@@ -1,16 +1,11 @@
-import React from "react";
-import { getTextData } from "../utils";
+import { evaluateTextStats } from "../utils";
 import { useEffect, useState } from "react";
 
 const useTextData = (text) => {
-  const [textData, setTextData] = useState({
-    wordCount: 0,
-    charCount: 0,
-    topUsedWords: [],
-  });
+  const [textData, setTextData] = useState({});
 
   useEffect(() => {
-    setTextData(getTextData(text));
+    setTextData(evaluateTextStats(text));
   }, [text]);
 
   return textData;

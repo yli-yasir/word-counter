@@ -9,26 +9,25 @@ import {
   ScaleFade,
   Heading,
 } from "@chakra-ui/react";
-
 import { useAsyncFn } from "react-use";
-import { aggregateWordSynoyms, getWordData } from "../utils";
+import { aggregateWordSynoyms, getWordData } from "../wordAPI";
 import LoadingPresenter from "./LoadingPresenter";
+import PropTypes from "prop-types";
 
 export default function WordAccordionItem(props) {
-  const { annotatedWord, ...rootProps } = props;
+  const { wordFrequency, ...rootProps } = props;
   const [{ loading, error, value: synonyms }, fetchWord] =
     useAsyncFn(async () => {
-      const fetchResult = await getWordData(annotatedWord.word);
-      console.log(fetchResult);
+      const fetchResult = await getWordData(wordFrequency.word);
       return aggregateWordSynoyms(fetchResult.data[0]);
-    }, [annotatedWord]);
+    }, [wordFrequency]);
 
   return (
     <AccordionItem {...rootProps}>
       <h2>
-        <AccordionButton onClick={() => fetchWord(annotatedWord)}>
+        <AccordionButton onClick={() => fetchWord(wordFrequency.word)}>
           <Box flex="1" textAlign="left" textTransform="capitalize">
-            {`${annotatedWord.word} (${annotatedWord.annotation})`}
+            {`${wordFrequency.word} (${wordFrequency.count})`}
           </Box>
           <AccordionIcon />
         </AccordionButton>
@@ -41,6 +40,13 @@ export default function WordAccordionItem(props) {
     </AccordionItem>
   );
 }
+
+WordAccordionItem.propTypes = {
+  wordFrequency: PropTypes.shape({
+    word: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+  }),
+};
 
 function renderSynonyms(synonyms) {
   return synonyms.length > 0 ? (

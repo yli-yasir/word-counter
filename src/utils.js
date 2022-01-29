@@ -17,6 +17,10 @@
  * @typedef {"asc" | "desc"} sortOrder
  */
 
+/**
+ * @param {string} text
+ * @returns {textStats}
+ */
 export function evaluateTextStats(text) {
   const words = text.match(/\w[\w-]*/g) || [];
   return {
