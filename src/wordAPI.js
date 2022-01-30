@@ -1,16 +1,23 @@
 import axios from "axios";
 
-export async function getWordData(word) {
-  return await axios.get(
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word.trim()}`
-  );
-}
+const endpoint = `http://word-counter-api.herokuapp.com`;
 
-export function aggregateWordSynoyms(wordData) {
+/**
+ *
+ * @param {string} word
+ * @returns {string[]}
+ */
+export async function getSynonyms(word) {
+  const { data } = await axios.get(`${endpoint}/lookup/${word.trim()}`);
   const synonyms = [];
-  for (const meaning of wordData.meanings) {
-    for (const definition of meaning.definitions) {
-      synonyms.push(...definition.synonyms);
+  const record = {};
+  for (const entry of data) {
+    for (let synonym of entry.synonyms) {
+      synonym = synonym.toLowerCase();
+      if (!record[synonym]) {
+        record[synonym] = true;
+        synonyms.push(synonym.replaceAll("_", " "));
+      }
     }
   }
   return synonyms;

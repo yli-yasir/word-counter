@@ -10,7 +10,7 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { useAsyncFn } from "react-use";
-import { aggregateWordSynoyms, getWordData } from "../wordAPI";
+import { getSynonyms } from "../wordAPI";
 import LoadingPresenter from "./LoadingPresenter";
 import wordFrequency from "../appPropTypes";
 
@@ -18,8 +18,7 @@ export default function WordAccordionItem(props) {
   const { wordFrequency, ...rootProps } = props;
   const [{ loading, error, value: synonyms }, fetchWord] =
     useAsyncFn(async () => {
-      const fetchResult = await getWordData(wordFrequency.word);
-      return aggregateWordSynoyms(fetchResult.data[0]);
+      return getSynonyms(wordFrequency.word);
     }, [wordFrequency]);
 
   return (
