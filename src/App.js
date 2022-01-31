@@ -5,6 +5,7 @@ import WordAccordion from "./components/WordAccordion";
 import { useState } from "react";
 import useTextData from "./hooks/useTextData";
 import { debouncedSetInputText } from "./utils";
+import WordChart from "./components/WordChart";
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -23,7 +24,12 @@ function App() {
           onChange={(e) => debouncedSetInputText(setInputText, e.target.value)}
         />
         <Stats wordCount={wordCount} charCount={charCount} />
-        <WordAccordion wordFrequencies={wordFrequencies} />
+        {wordFrequencies && (
+          <>
+            <WordAccordion wordFrequencies={wordFrequencies} />
+            <WordChart wordFrequencies={wordFrequencies} />
+          </>
+        )}
       </Flex>
     </Box>
   );
