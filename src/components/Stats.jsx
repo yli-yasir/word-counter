@@ -1,36 +1,77 @@
-import { Stat, StatLabel, StatNumber, StatGroup } from "@chakra-ui/react";
+import { Box, Stat, StatLabel, StatNumber, StatGroup } from "@chakra-ui/react";
 
 import React from "react";
 
-const CountStats = ({ charCount, wordCount }) => {
+const Stats = ({ charCount, wordCount }) => {
   return (
-    <StatGroup
-      borderRadius="lg"
-      border={"2px"}
-      my="8px"
-      borderColor="blue.400"
-      p="10px"
-    >
-      <Stat
-        p="5px"
-        bg="blue.400"
-        borderRadius={"lg"}
-        borderColor="gray.100"
-        mr="5px"
+    <Box display="flex" justifyContent={"center"}>
+      <StatGroup
+        border="4px"
+        borderRadius={"20px"}
+        borderColor={"main.600"}
+        my="8px"
+        bg="white"
+        p="10px"
+        display="flex"
+        justifyContent={"space-around"}
+        maxWidth={"300px"}
+        minWidth={"30%"}
+        color="main.900"
       >
-        <StatLabel fontSize="2xl">Words</StatLabel>
-        <StatNumber fontSize={"18px"} fontWeight={"normal"} color="white">
-          {wordCount}
-        </StatNumber>
-      </Stat>
-      <Stat p="5px" bg="blue.400" borderRadius={"lg"}>
-        <StatLabel fontSize="2xl">Characters</StatLabel>
-        <StatNumber fontSize={"18px"} fontWeight={"normal"} color="white">
-          {charCount}
-        </StatNumber>
-      </Stat>
-    </StatGroup>
+        <Stat
+          p="5px"
+          bg="main.300"
+          borderRadius={"lg"}
+          mr="5px"
+          maxWidth={"250px"}
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          <StatLabel
+            width={"100px"}
+            fontSize="18px"
+            borderRadius="full"
+            bg={"white"}
+            textAlign={"center"}
+          >
+            Words
+          </StatLabel>
+          <StatNumber
+            fontSize={"18px"}
+            fontWeight={"normal"}
+            textAlign={"center"}
+          >
+            {wordCount}
+          </StatNumber>
+        </Stat>
+        <Stat
+          p="5px"
+          bg="main.600"
+          borderRadius={"lg"}
+          maxWidth={"250px"}
+          display={"flex"}
+          justifyContent={"center"}
+        >
+          <StatLabel
+            width={"100px"}
+            fontSize="18px"
+            borderRadius="full"
+            bg={"white"}
+            textAlign={"center"}
+          >
+            Characters
+          </StatLabel>
+          <StatNumber
+            textAlign={"center"}
+            fontSize={"18px"}
+            fontWeight={"normal"}
+          >
+            {charCount}
+          </StatNumber>
+        </Stat>
+      </StatGroup>
+    </Box>
   );
 };
 
-export default CountStats;
+export default Stats;
