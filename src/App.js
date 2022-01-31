@@ -4,8 +4,12 @@ import Stats from "./components/Stats";
 import WordAccordion from "./components/WordAccordion";
 import { useState } from "react";
 import useTextData from "./hooks/useTextData";
-import { debouncedSetInputText } from "./utils";
 import WordChart from "./components/WordChart";
+import { debounce } from "lodash";
+
+const debouncedSetInputText = debounce((func, text) => {
+  func(text);
+}, 1000);
 
 function App() {
   const [inputText, setInputText] = useState("");
@@ -14,11 +18,11 @@ function App() {
   return (
     <Box display={"flex"} justifyContent={"center"}>
       <Flex
-        mt="20px"
-        w={{ md: "80%", base: "95%" }}
-        direction={"column"}
+        mt={4}
+        w={{ lg: "60%", md: "80%", base: "95%" }}
+        direction="column"
         rowGap={"10px"}
-        justify="center"
+        alignItems="center"
       >
         <InputField
           onChange={(e) => debouncedSetInputText(setInputText, e.target.value)}
@@ -26,8 +30,13 @@ function App() {
         <Stats wordCount={wordCount} charCount={charCount} />
         {wordFrequencies && (
           <>
-            <WordAccordion wordFrequencies={wordFrequencies} />
-            <WordChart wordFrequencies={wordFrequencies} />
+            <Box maxH="300px">
+              <WordChart wordFrequencies={wordFrequencies} />
+            </Box>
+            <WordAccordion
+              width={{ base: "100%", lg: "50%" }}
+              wordFrequencies={wordFrequencies}
+            />
           </>
         )}
       </Flex>

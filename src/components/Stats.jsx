@@ -6,68 +6,22 @@ const Stats = ({ charCount, wordCount }) => {
   return (
     <Box display="flex" justifyContent={"center"}>
       <StatGroup
-        border="4px"
-        borderRadius={"20px"}
-        borderColor={"main.600"}
-        my="8px"
+        borderRadius="1rem"
         bg="white"
-        p="10px"
+        p={2}
         display="flex"
-        justifyContent={"space-around"}
-        maxWidth={"300px"}
-        minWidth={"30%"}
-        color="main.900"
+        justifyContent="space-around"
+        width="300px"
+        color="app.font"
+        boxShadow="lg"
       >
-        <Stat
-          p="5px"
-          bg="main.300"
-          borderRadius={"lg"}
-          mr="5px"
-          maxWidth={"250px"}
-          display={"flex"}
-          justifyContent={"center"}
-        >
-          <StatLabel
-            width={"100px"}
-            fontSize="18px"
-            borderRadius="full"
-            bg={"white"}
-            textAlign={"center"}
-          >
-            Words
-          </StatLabel>
-          <StatNumber
-            fontSize={"18px"}
-            fontWeight={"normal"}
-            textAlign={"center"}
-          >
-            {wordCount}
-          </StatNumber>
+        <Stat textAlign="center">
+          <StatLabel>Words</StatLabel>
+          <StatNumber>{wordCount}</StatNumber>
         </Stat>
-        <Stat
-          p="5px"
-          bg="main.600"
-          borderRadius={"lg"}
-          maxWidth={"250px"}
-          display={"flex"}
-          justifyContent={"center"}
-        >
-          <StatLabel
-            width={"100px"}
-            fontSize="18px"
-            borderRadius="full"
-            bg={"white"}
-            textAlign={"center"}
-          >
-            Characters
-          </StatLabel>
-          <StatNumber
-            textAlign={"center"}
-            fontSize={"18px"}
-            fontWeight={"normal"}
-          >
-            {charCount}
-          </StatNumber>
+        <Stat textAlign="center">
+          <StatLabel>Characters</StatLabel>
+          <StatNumber>{charCount}</StatNumber>
         </Stat>
       </StatGroup>
     </Box>

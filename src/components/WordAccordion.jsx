@@ -5,7 +5,6 @@ import wordFrequency from "../appPropTypes";
 
 export default function WordAccordion(props) {
   const { wordFrequencies, ...otherProps } = props;
-  console.log("re render");
   return (
     <Accordion {...otherProps}>
       {wordFrequencies.map((wordFrequency) => (

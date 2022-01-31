@@ -1,4 +1,3 @@
-import { debounce } from "lodash";
 // Just use typescript?
 
 /**
@@ -63,8 +62,3 @@ function sortWordFrequencies(wordFrequencies, sortOrder) {
     (a, b) => (a.count - b.count) * sortOrderModifier
   );
 }
-
-export const debouncedSetInputText = debounce(
-  (funcName, text) => funcName(text),
-  1000
-);
