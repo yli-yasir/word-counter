@@ -1,5 +1,5 @@
 import InputField from "./components/Input";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Heading } from "@chakra-ui/react";
 import Stats from "./components/Stats";
 import WordAccordion from "./components/WordAccordion";
 import { useState } from "react";
@@ -16,7 +16,10 @@ function App() {
   const { wordFrequencies, wordCount, charCount } = useTextData(inputText);
 
   return (
-    <Box display={"flex"} justifyContent={"center"}>
+    <Box display={"flex"} alignItems="center" flexDirection="column">
+      <Heading width="100%" bg="app.secondary" textAlign="center">
+        Word Counter
+      </Heading>
       <Flex
         mt={4}
         w={{ lg: "60%", md: "80%", base: "95%" }}
@@ -29,15 +32,18 @@ function App() {
         />
         <Stats wordCount={wordCount} charCount={charCount} />
         {wordFrequencies && (
-          <>
-            <Box maxH="300px">
-              <WordChart wordFrequencies={wordFrequencies} />
+          <Flex
+            my={8}
+            w="100%"
+            direction={{ base: "column", md: "row" }}
+            alignItems={{ base: "center", md: "start" }}
+            justifyContent="space-between"
+          >
+            <Box mr={4}>
+              <WordChart wordFrequencies={wordFrequencies.slice(0, 11)} />
             </Box>
-            <WordAccordion
-              width={{ base: "100%", lg: "50%" }}
-              wordFrequencies={wordFrequencies}
-            />
-          </>
+            <WordAccordion mt={4} w="100%" wordFrequencies={wordFrequencies} />
+          </Flex>
         )}
       </Flex>
     </Box>

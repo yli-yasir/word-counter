@@ -24,7 +24,11 @@ export default function WordAccordionItem(props) {
   return (
     <AccordionItem {...rootProps}>
       <h2>
-        <AccordionButton onClick={() => fetchWord(wordFrequency.word)}>
+        <AccordionButton
+          _focus={{ borderColor: "app.font" }}
+          _expanded={{ borderColor: "app.font" }}
+          onClick={() => fetchWord(wordFrequency.word)}
+        >
           <Box flex="1" textAlign="left" textTransform="capitalize">
             {`${wordFrequency.word} (${wordFrequency.count})`}
           </Box>
