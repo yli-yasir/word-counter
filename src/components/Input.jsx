@@ -1,5 +1,5 @@
 import React from "react";
-import { Textarea, Box } from "@chakra-ui/react";
+import { Textarea } from "@chakra-ui/react";
 
 const InputField = (props) => {
   return (

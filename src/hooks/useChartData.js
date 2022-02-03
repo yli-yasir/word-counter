@@ -16,12 +16,11 @@ function makeChartData(wordFrequencies) {
   const colors = [];
   const borderColors = [];
   for (let i = 0; i < wordFrequencies.length; i++) {
-    console.log("looping");
     const { word, count } = wordFrequencies[i];
     words.push(word);
     counts.push(count);
-    colors.push(`hsla(${360 * (i / wordFrequencies.length)},100%,60%,0.2)`);
-    borderColors.push(`hsla(${360 * (i / wordFrequencies.length)},100%,60%,1)`);
+    colors.push(`hsla(${360 * (i / wordFrequencies.length)},90%,60%,0.5)`);
+    borderColors.push(`hsla(${360 * (i / wordFrequencies.length)},90%,60%,1)`);
   }
   return {
     labels: words,

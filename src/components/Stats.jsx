@@ -16,11 +16,11 @@ const Stats = ({ charCount, wordCount }) => {
         boxShadow="lg"
       >
         <Stat textAlign="center">
-          <StatLabel>Words</StatLabel>
+          <StatLabel fontSize="lg">Words</StatLabel>
           <StatNumber>{wordCount}</StatNumber>
         </Stat>
         <Stat textAlign="center">
-          <StatLabel>Characters</StatLabel>
+          <StatLabel fontSize="lg">Characters</StatLabel>
           <StatNumber>{charCount}</StatNumber>
         </Stat>
       </StatGroup>

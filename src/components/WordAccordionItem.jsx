@@ -56,7 +56,7 @@ function renderSynonyms(synonyms) {
       </Heading>
       <UnorderedList textTransform="capitalize">
         {synonyms.map((synonym) => (
-          <ScaleFade initialScale={0.1} in={true}>
+          <ScaleFade key={synonym} initialScale={0.1} in={true}>
             <ListItem>{synonym}</ListItem>
           </ScaleFade>
         ))}

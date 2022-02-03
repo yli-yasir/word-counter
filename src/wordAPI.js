@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const endpoint = `http://word-counter-api.herokuapp.com`;
+const endpoint = `https://word-counter-api.herokuapp.com`;
 
 /**
  *

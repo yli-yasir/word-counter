@@ -7,6 +7,9 @@ const theme = extendTheme({
         background: "app.primary",
         color: "app.font",
       },
+      "*": {
+        boxSizing: "border-box",
+      },
     },
   },
   fonts: {
