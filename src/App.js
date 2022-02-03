@@ -32,7 +32,7 @@ function App() {
           onChange={(e) => debouncedSetInputText(setInputText, e.target.value)}
         />
         <Stats wordCount={wordCount} charCount={charCount} />
-        {wordFrequencies.length > 0 && (
+        {wordFrequencies?.length > 0 && (
           <Flex my={8} w="100%" flexFlow="row wrap" justifyContent="center">
             <Box mr={4}>
               <WordChart wordFrequencies={wordFrequencies.slice(0, 11)} />
