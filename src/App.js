@@ -16,33 +16,33 @@ function App() {
   const { wordFrequencies, wordCount, charCount } = useTextData(inputText);
 
   return (
-    <Box display={"flex"} alignItems="center" flexDirection="column">
+    <Box display="flex" alignItems="center" flexDirection="column">
       <Heading width="100%" bg="app.secondary" textAlign="center">
         Word Counter
       </Heading>
       <Flex
         mt={4}
-        w={{ lg: "60%", md: "80%", base: "95%" }}
         direction="column"
-        rowGap={"10px"}
+        rowGap="10px"
         alignItems="center"
+        width="95%"
+        maxW="900px"
       >
         <InputField
           onChange={(e) => debouncedSetInputText(setInputText, e.target.value)}
         />
         <Stats wordCount={wordCount} charCount={charCount} />
-        {wordFrequencies && (
-          <Flex
-            my={8}
-            w="100%"
-            direction={{ base: "column", md: "row" }}
-            alignItems={{ base: "center", md: "start" }}
-            justifyContent="space-between"
-          >
+        {wordFrequencies.length > 0 && (
+          <Flex my={8} w="100%" flexFlow="row wrap" justifyContent="center">
             <Box mr={4}>
               <WordChart wordFrequencies={wordFrequencies.slice(0, 11)} />
             </Box>
-            <WordAccordion mt={4} w="100%" wordFrequencies={wordFrequencies} />
+            <WordAccordion
+              mt={4}
+              wordFrequencies={wordFrequencies}
+              flexGrow="1"
+              minW="300px"
+            />
           </Flex>
         )}
       </Flex>
